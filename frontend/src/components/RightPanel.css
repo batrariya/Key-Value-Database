@@ -1,0 +1,16 @@
+.right-panel {
+  width: 50%;
+  padding: 30px;
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+  
