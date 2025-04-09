@@ -1,34 +1,56 @@
 import json
 import os
 from datetime import datetime
+from .core import load_file, save_file, log_action, STORE_FILE
 
-STORE_FILE = os.path.join(os.path.dirname(__file__), 'store.json')
-SNAPSHOT_FILE = os.path.join(os.path.dirname(__file__), 'snapshots.json')
+SNAPSHOT_FILE = os.path.join(os.path.dirname(__file__), 'snapshot.json')
 
-def load_json(path):
-    if not os.path.exists(path):
-        return []
-    with open(path, 'r') as f:
-        return json.load(f)
 
-def save_json(path, data):
-    with open(path, 'w') as f:
-        json.dump(data, f, indent=4)
-
-def take_snapshot():
-    store = load_json(STORE_FILE)
-    snapshots = load_json(SNAPSHOT_FILE)
-    snapshots.append({
+def take_snapshot(name):
+    store = load_file(STORE_FILE)
+    snapshots = load_file(SNAPSHOT_FILE)
+    snapshots[name] = {
         'timestamp': datetime.now().isoformat(),
         'data': store
-    })
-    save_json(SNAPSHOT_FILE, snapshots)
+    }
+    save_file(SNAPSHOT_FILE, snapshots)
+    log_action(f"SNAPSHOT {name}")
 
-def restore_snapshot(index):
-    snapshots = load_json(SNAPSHOT_FILE)
-    if 0 <= index < len(snapshots):
-        store = snapshots[index]['data']
-        save_json(STORE_FILE, store)
+
+def restore_snapshot(name):
+    snapshots = load_file(SNAPSHOT_FILE)
+    if name in snapshots:
+        save_file(STORE_FILE, snapshots[name]['data'])
+        log_action(f"RESTORE SNAPSHOT {name}")
     else:
-        print("Invalid snapshot index")
+        print("Snapshot not found")
+
+
+def delete_snapshot(name):
+    snapshots = load_file(SNAPSHOT_FILE)
+    if name in snapshots:
+        del snapshots[name]
+        save_file(SNAPSHOT_FILE, snapshots)
+        log_action(f"DELETE SNAPSHOT {name}")
+
+
+def view_snapshot(name):
+    snapshots = load_file(SNAPSHOT_FILE)
+    log_action(f"VIEW SNAPSHOT {name}")
+    return snapshots.get(name, {}).get("data", None)
+
+
+def view_all_snapshots():
+    log_action("VIEW ALL SNAPSHOTS")
+    return load_file(SNAPSHOT_FILE)
+
+
+def view_latest_snapshot():
+    snapshots = load_file(SNAPSHOT_FILE)
+    log_action("VIEW LATEST SNAPSHOT")
+    if snapshots:
+        last_key = list(snapshots.keys())[-1]
+        return snapshots[last_key]["data"]
+    return {}
+
     
