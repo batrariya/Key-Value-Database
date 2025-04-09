@@ -17,7 +17,7 @@ def take_snapshot(name):
 def restore_snapshot(name):
     snapshots = load_file(SNAPSHOT_FILE)
     if name in snapshots:
-        save_file(STORE_FILE, snapshots[name]['data'])
+        save_file(STORE_FILE, snapshots[name])
         log_action(f"RESTORE SNAPSHOT {name}")
     else:
         print("Snapshot not found")
@@ -48,7 +48,7 @@ def view_latest_snapshot():
     log_action("VIEW LATEST SNAPSHOT")
     if snapshots:
         last_key = list(snapshots.keys())[-1]
-        return snapshots[last_key]["data"]
+        return snapshots[last_key]
     return {}
 
     
