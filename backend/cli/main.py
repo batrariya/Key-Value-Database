@@ -53,7 +53,7 @@ def view():
 
 @cli.command()
 @click.argument('name')
-def snapshot(name):
+def takesnap(name):
     snapshot.take_snapshot(name)
     click.echo(f"Snapshot '{name}' created.")
 

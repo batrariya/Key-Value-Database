@@ -3,16 +3,13 @@ import os
 from datetime import datetime
 from .core import load_file, save_file, log_action, STORE_FILE
 
-SNAPSHOT_FILE = os.path.join(os.path.dirname(__file__), 'snapshot.json')
+SNAPSHOT_FILE = os.path.join(os.path.dirname(__file__), 'snapshots.json')
 
 
 def take_snapshot(name):
     store = load_file(STORE_FILE)
     snapshots = load_file(SNAPSHOT_FILE)
-    snapshots[name] = {
-        'timestamp': datetime.now().isoformat(),
-        'data': store
-    }
+    snapshots[name] = store
     save_file(SNAPSHOT_FILE, snapshots)
     log_action(f"SNAPSHOT {name}")
 
@@ -37,7 +34,8 @@ def delete_snapshot(name):
 def view_snapshot(name):
     snapshots = load_file(SNAPSHOT_FILE)
     log_action(f"VIEW SNAPSHOT {name}")
-    return snapshots.get(name, {}).get("data", None)
+    # return snapshots.get(name, {}).get("data", None)
+    return snapshots[name]
 
 
 def view_all_snapshots():

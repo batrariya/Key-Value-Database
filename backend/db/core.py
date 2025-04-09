@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime
 
-STORE_FILE = os.path.join(os.path.dirname(__file__), 'core.json')
+STORE_FILE = os.path.join(os.path.dirname(__file__), 'store.json')
 HISTORY_FILE = os.path.join(os.path.dirname(__file__), 'history.json')
 
 
