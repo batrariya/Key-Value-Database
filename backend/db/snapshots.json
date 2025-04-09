@@ -1,5 +1,13 @@
 {
     "def": {
         "name": "kirti"
+    },
+    "snap1": {
+        "test": "123"
+    },
+    "sanp2": {
+        "key": "name",
+        "test": "123",
+        "tree": "apple"
     }
 }

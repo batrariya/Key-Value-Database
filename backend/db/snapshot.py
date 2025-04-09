@@ -4,6 +4,7 @@ from datetime import datetime
 from .core import load_file, save_file, log_action, STORE_FILE
 
 SNAPSHOT_FILE = os.path.join(os.path.dirname(__file__), 'snapshots.json')
+SNAPSHOT_RECENT = os.path.join(os.path.dirname(__file__), 'snapshot.json')
 
 
 def take_snapshot(name):
@@ -17,7 +18,7 @@ def take_snapshot(name):
 def restore_snapshot(name):
     snapshots = load_file(SNAPSHOT_FILE)
     if name in snapshots:
-        save_file(STORE_FILE, snapshots[name]['data'])
+        save_file(STORE_FILE, snapshots[name])
         log_action(f"RESTORE SNAPSHOT {name}")
     else:
         print("Snapshot not found")
@@ -48,7 +49,6 @@ def view_latest_snapshot():
     log_action("VIEW LATEST SNAPSHOT")
     if snapshots:
         last_key = list(snapshots.keys())[-1]
-        return snapshots[last_key]["data"]
+        return snapshots[last_key]
     return {}
 
-    
