@@ -4,10 +4,10 @@
   width: 100%;
   max-width: 200px;
   min-height: 150px;
-  background-color: #2563eb; /* Default color */
+  background-color: #2563eb; 
   color: #f4f4f5;
 
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 500;
 
   border: none;
@@ -26,8 +26,8 @@
 
 /* Active state */
 .custom-button.active {
-  background-color: #15a297;
-  color: #f4f4f5
+  background-color: #f4f4f5;
+  color: #18181b;
 }
 
 @media (max-width: 768px) {

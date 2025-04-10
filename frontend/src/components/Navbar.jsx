@@ -1,6 +1,6 @@
 import React from "react";
-import "./Navbar.css"; // Link to the CSS file
-import { SaveAll } from "lucide-react"; // or use an image/logo instead
+import "./Navbar.css"; 
+import { SaveAll } from "lucide-react"; 
 
 const Navbar = () => {
   return (
