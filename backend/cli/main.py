@@ -98,6 +98,13 @@ def deletesnap(name):
 def history():
     hist = core.get_history()
     click.echo(hist)
+    
+    
+@cli.command()
+def clear():
+    core.clear_db()  # Clear the database by calling the clear_db function from core
+    click.echo("Database cleared.")
+
 
 
 if __name__ == "__main__":

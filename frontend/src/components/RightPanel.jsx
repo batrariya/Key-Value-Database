@@ -13,9 +13,10 @@ const buttons = [
   { label: "Snapshot DB", action: "snapshotDB" },
   { label: "Restore Snapshot", action: "restoreSnapshot" },
   { label: "View Snapshots", action: "viewSnapshots" },
-  { label: "Export DB", action: "exportDB" },
-  { label: "Import DB", action: "importDB" },
-  { label: "Health Check", action: "healthCheck" },
+  { label: "Latest Snapshot", action: "exportDB" },
+  // { label: "Import DB", action: "importDB" },
+  { label: "Delete Snapshot", action: "deleteSnapshot" },  // Changed label and action
+  { label: "History", action: "getHistory" },
 ];
 
 const RightPanel = ({ setCurrentAction }) => {

@@ -1,22 +1,30 @@
 from fastapi import FastAPI, HTTPException
 from backend.db import core, snapshot
+from fastapi import APIRouter
 
-app = FastAPI(title="KVDB API")
+# app = FastAPI(title="KVDB API")
+router = APIRouter()
 
-
-@app.get("/")
+@router.get("/")
 def root():
     return {"message": "Welcome to KVDB API"}
 
 
+# @app.get("/")
+# def root():
+#     return {"message": "Welcome to KVDB API"}
+
+
 # -------------------- Core APIs --------------------
-@app.post("/set/")
+# @app.post("/set/")
+@router.post("/set/")
 def set_key(key: str, value: str):
     core.set_key(key, value)
     return {"message": f"Set {key} = {value}"}
 
 
-@app.get("/get/{key}")
+# @app.get("/get/{key}")
+@router.get("/get/{key}")
 def get_key(key: str):
     value = core.get_key(key)
     if value is None:
@@ -24,36 +32,44 @@ def get_key(key: str):
     return {key: value}
 
 
-@app.delete("/delete/{key}")
+# @app.delete("/delete/{key}")
+
+@router.delete("/delete/{key}")
 def delete_key(key: str):
 
     core.delete_key(key)
     return {"message": f"Deleted {key}"}
 
 
-@app.get("/exists/{key}")
+# @app.get("/exists/{key}")
+@router.get("/exists/{key}")
 def key_exists(key: str):
     return {"exists": core.key_exists(key)}
 
 
-@app.get("/view")
+# @app.get("/view")
+
+@router.get("/view")
 def view_store():
     return core.view_store()
 
 
-@app.get("/history")
+# @app.get("/history")
+@router.get("/history")
 def get_history():
     return core.get_history()
 
 
 # -------------------- Snapshot APIs --------------------
-@app.post("/snapshot/take/")
+# @app.post("/snapshot/take/")
+@router.post("/snapshot/take/")
 def take_snapshot(name: str):
     snapshot.take_snapshot(name)
     return {"message": f"Snapshot '{name}' taken."}
 
 
-@app.get("/snapshot/view/{name}")
+# @app.get("/snapshot/view/{name}")
+@router.get("/snapshot/view/{name}")
 def view_snapshot(name: str):
     try:
         return snapshot.view_snapshot(name)
@@ -61,7 +77,8 @@ def view_snapshot(name: str):
         raise HTTPException(status_code=404, detail="Snapshot not found")
 
 
-@app.post("/snapshot/restore/")
+# @app.post("/snapshot/restore/")
+@router.post("/snapshot/restore/")
 def restore_snapshot(name: str):
     try:
         snapshot.restore_snapshot(name)
@@ -70,17 +87,32 @@ def restore_snapshot(name: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@app.delete("/snapshot/delete/{name}")
+# @app.delete("/snapshot/delete/{name}")
+@router.delete("/snapshot/delete/{name}")
 def delete_snapshot(name: str):
     snapshot.delete_snapshot(name)
     return {"message": f"Deleted snapshot '{name}'"}
 
 
-@app.get("/snapshot/all")
+# @app.get("/snapshot/all")
+@router.get("/snapshot/all")
 def all_snapshots():
     return snapshot.view_all_snapshots()
 
 
-@app.get("/snapshot/latest")
+# @app.get("/snapshot/latest")
+@router.get("/snapshot/latest")
 def latest_snapshot():
     return snapshot.view_latest_snapshot()
+
+
+# -------------------- Clear Database API --------------------
+
+
+@router.post("/clear_db/")
+def clear_db():
+    try:
+        core.clear_db()  # Call the function to clear the database
+        return {"message": "Database cleared successfully."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
