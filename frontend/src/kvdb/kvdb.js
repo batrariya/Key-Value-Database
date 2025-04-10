@@ -18,6 +18,10 @@ export async function deleteKey(key) {
   const response = await fetch(`${BASE_URL}/delete/${key}`, {
     method: "DELETE",
   });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || `Key '${key}' not found and hence can't be deleted`);
+  }
   return response.json();
 }
 
@@ -65,6 +69,10 @@ export async function deleteSnapshot(name) {
   const response = await fetch(`${BASE_URL}/snapshot/delete/${name}`, {
     method: "DELETE",
   });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || `Snapshot '${name}' not found and hence can't be deleted`);
+  }
   return response.json();
 }
 

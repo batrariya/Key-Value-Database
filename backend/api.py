@@ -36,7 +36,9 @@ def get_key(key: str):
 
 @router.delete("/delete/{key}")
 def delete_key(key: str):
-
+    if not core.key_exists(key):
+        raise HTTPException(status_code=404, detail=f"Key '{key}' not found and hence can't be deleted")
+    
     core.delete_key(key)
     return {"message": f"Deleted {key}"}
 
@@ -78,8 +80,20 @@ def view_snapshot(name: str):
 
 
 # @app.post("/snapshot/restore/")
+# @router.post("/snapshot/restore/")
+# def restore_snapshot(name: str):
+#     try:
+#         snapshot.restore_snapshot(name)
+#         return {"message": f"Snapshot '{name}' restored."}
+#     except Exception as e:
+#         raise HTTPException(status_code=400, detail=str(e))
 @router.post("/snapshot/restore/")
 def restore_snapshot(name: str):
+    all_snapshots = snapshot.view_all_snapshots()
+
+    if name not in all_snapshots:
+        raise HTTPException(status_code=404, detail=f"Snapshot '{name}' not found and hence can't be restored")
+
     try:
         snapshot.restore_snapshot(name)
         return {"message": f"Snapshot '{name}' restored."}
@@ -87,9 +101,12 @@ def restore_snapshot(name: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-# @app.delete("/snapshot/delete/{name}")
-@router.delete("/snapshot/delete/{name}")
+# @router.delete("/snapshot/delete/{name}")
 def delete_snapshot(name: str):
+    all_snapshots = snapshot.view_all_snapshots()
+    if name not in all_snapshots:
+        raise HTTPException(status_code=404, detail=f"Snapshot '{name}' not found and hence can't be deleted")
+
     snapshot.delete_snapshot(name)
     return {"message": f"Deleted snapshot '{name}'"}
 

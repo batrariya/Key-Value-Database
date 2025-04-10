@@ -1,6 +1,10 @@
 {
-    "snap1": {
-        "SN02": "Charlie",
-        "SN03": "Ram"
+    "stud1": {
+        "name": "priya",
+        "roll": "105"
+    },
+    "night": {
+        "name": "priya",
+        "roll": "105"
     }
 }
