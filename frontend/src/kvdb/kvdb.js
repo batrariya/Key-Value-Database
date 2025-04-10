@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000"; // adjust if deployed elsewhere
+const BASE_URL = "http://localhost:8000";
 
 // Core APIs
 export async function setKey(key, value) {
@@ -78,11 +78,11 @@ export async function viewAllSnapshots() {
 //   return response.json();
 // }
 
-// Placeholder APIs for Import/Export/Health (Not implemented in backend yet)
+
 // export async function exportDB() {
 //   const response = await fetch(`${BASE_URL}/view`);
 //   if (!response.ok) throw new Error("Failed to export DB");
-//   return await response.json();  // ← this is what was missing!
+//   return await response.json();
 // }
 
 export async function exportDB() {

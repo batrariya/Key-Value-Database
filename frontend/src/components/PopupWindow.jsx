@@ -10,9 +10,9 @@ import {
   viewAllSnapshots,
   exportDB,
   // importDB,
-  getHistory, // ✅ Added here
-  deleteSnapshot, // Import deleteSnapshot here
-  clearDB, // Import clearDB here
+  getHistory,
+  deleteSnapshot,
+  clearDB,
 } from "../kvdb/kvdb";
 
 const functionDetails = {
@@ -114,16 +114,16 @@ const PopupWindow = ({ action }) => {
         case "exportDB":
           res = await exportDB();
           break;
-        case "deleteSnapshot": // Add the deleteSnapshot case
+        case "deleteSnapshot":
         res = await deleteSnapshot(snapshotName);
         break;
 
-        case "getHistory": // ✅ New case
+        case "getHistory":
           res = await getHistory();
           break;
         
-        case "clearDB": // Handle the clearDB action here
-          res = await clearDB(); // Call clearDB function here
+        case "clearDB":
+          res = await clearDB();
           break;
 
         default:

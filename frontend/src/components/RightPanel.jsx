@@ -2,7 +2,7 @@ import React from "react";
 import CustomButton from "./CustomButton";
 import "./RightPanel.css";
 
-// Button labels and backend actions
+
 const buttons = [
   { label: "Set Key", action: "setKey" },
   { label: "Get Value", action: "getValue" },
@@ -15,7 +15,7 @@ const buttons = [
   { label: "View Snapshots", action: "viewSnapshots" },
   { label: "Latest Snapshot", action: "exportDB" },
   // { label: "Import DB", action: "importDB" },
-  { label: "Delete Snapshot", action: "deleteSnapshot" },  // Changed label and action
+  { label: "Delete Snapshot", action: "deleteSnapshot" },
   { label: "History", action: "getHistory" },
 ];
 

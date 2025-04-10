@@ -62,17 +62,16 @@ def get_history():
 
 # def clear_db():
 #     """Clear all entries in the store (store.json)"""
-#     save_file(STORE_FILE, {})  # Save an empty dictionary to the store.json
-#     log_action("CLEAR STORE")  # Log the clear action
+#     save_file(STORE_FILE, {})
+#     log_action("CLEAR STORE")
 
 
 def clear_db():
     try:
         store = load_file(STORE_FILE)
-        store.clear()  # Clear all entries
-        save_file(STORE_FILE, store)  # Save the empty store back to the file
+        store.clear()
+        save_file(STORE_FILE, store)
         log_action("Database cleared.")
     except Exception as e:
         raise Exception(f"Error while clearing the database: {str(e)}")
 
-# hi priyamvada

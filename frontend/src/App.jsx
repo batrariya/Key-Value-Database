@@ -7,12 +7,12 @@ import './App.css';
 function App() {
   const [currentAction, setCurrentAction] = useState(null);
 
-  // Toggle logic: close if same button clicked again
+
   const handleButtonClick = (action) => {
     if (currentAction === action) {
-      setCurrentAction(null); // close popup
+      setCurrentAction(null);
     } else {
-      setCurrentAction(action); // open new popup
+      setCurrentAction(action);
     }
   };
 

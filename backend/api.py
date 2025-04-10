@@ -112,7 +112,7 @@ def latest_snapshot():
 @router.post("/clear_db/")
 def clear_db():
     try:
-        core.clear_db()  # Call the function to clear the database
+        core.clear_db()
         return {"message": "Database cleared successfully."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
