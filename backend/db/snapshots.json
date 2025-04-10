@@ -1,13 +1,5 @@
 {
     "snap1": {
-        "test": "123"
-    },
-    "snap2": {
-        "key": "name",
-        "test": "123",
-        "tree": "apple"
-    },
-    "snap3": {
-        "test": "456"
+        "SN02": "Bob"
     }
 }
