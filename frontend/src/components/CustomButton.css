@@ -1,24 +1,41 @@
 .custom-button {
-  margin-top: 25px;
-  margin-right: 25px;
-  padding: 20px;
-  width: 200px;
-  height: 140px;
-  background-color: #28282a;
-  color: #fff;
-  font-size: 16px;
+  margin: 12px;
+  padding: 16px;
+  width: 100%;
+  max-width: 200px;
+  min-height: 150px;
+  background-color: #2563eb; /* Default color */
+  color: #f4f4f5;
+
+  font-size: 25px;
   font-weight: 500;
+
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+
+  transition: background-color 0.3s ease, transform 0.2s;
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .custom-button:hover {
-  background-color: #3a3a3c;
+  transform: translateY(-4px);
 }
 
+/* Active state */
 .custom-button.active {
-  background-color: #1a73e8;
-  color: white;
+  background-color: #15a297;
+  color: #f4f4f5
+}
+
+@media (max-width: 768px) {
+  .custom-button {
+    max-width: 100%;
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+    min-height: 100px;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomButton from "./CustomButton";
 import "./RightPanel.css";
 
@@ -19,14 +19,7 @@ const buttons = [
   { label: "History", action: "getHistory" },
 ];
 
-const RightPanel = ({ setCurrentAction }) => {
-  const [activeButton, setActiveButton] = useState(null);
-
-  const handleClick = (action) => {
-    setActiveButton(action);          // highlight active button
-    setCurrentAction(action);         // pass to App.jsx
-  };
-
+const RightPanel = ({ currentAction, onButtonClick }) => {
   return (
     <div className="right-panel">
       <div className="button-grid">
@@ -34,8 +27,8 @@ const RightPanel = ({ setCurrentAction }) => {
           <CustomButton
             key={index}
             text={label}
-            isActive={activeButton === action}
-            onClick={() => handleClick(action)}
+            isActive={currentAction === action}
+            onClick={() => onButtonClick(action)}
           />
         ))}
       </div>

@@ -5,15 +5,15 @@
 }
 
 body {
+  background-color: #18181b; 
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
 .app {
   flex-direction: column;
   height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   width: 100%;
 }
 
