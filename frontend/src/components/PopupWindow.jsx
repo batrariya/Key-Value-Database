@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import "./PopupWindow.css";
 import {
   setKey,
@@ -136,6 +136,15 @@ const PopupWindow = ({ action }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setKeyInput("");
+    setValueInput("");
+    setSnapshotName("");
+    setResult(null);
+    setLoading(false);
+  }, [action]);
+  
 
   return (
     <div className="popup-window">
